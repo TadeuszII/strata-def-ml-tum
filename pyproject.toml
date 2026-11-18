@@ -1,0 +1,41 @@
+[project]
+name = "strata-def-features"
+dynamic = ["version"]
+description = "Feature calculator for the Strata defensionis phishing detection system."
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "idna==3.20",
+    "tldextract==5.4.0",
+]
+
+[project.optional-dependencies]
+train = []
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0",
+    "ruff>=0.15",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+path = "src/strata_def_features/version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/strata_def_features"]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "W", "F", "I", "B", "UP", "SIM", "RUF"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--import-mode=importlib"]
